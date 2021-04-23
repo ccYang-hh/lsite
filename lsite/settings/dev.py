@@ -105,10 +105,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lsite',
-        'USER': 'yl',
+        'USER': 'lsite',
         'PASSWORD': 'Yl0727..',
         #'HOST': '192.168.43.184',
-        'HOST': '192.168.31.172',
+        'HOST': '47.117.1.196',
         'PORT': 3306,
     }
 }
