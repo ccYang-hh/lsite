@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'django-insecure--e#%771@ddgg2(w^a0sp-hd-$hpru-g_=bb510kli$=*@pvw1!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -259,9 +259,7 @@ SESSION_CACHE_ALIAS = "session"
 CORS_ORIGIN_ALLOW_ALL = True
 # 跨域访问白名单
 CORS_ORIGIN_WHITELIST = [
-    'http://127.0.0.1:8081',
-    'http://localhost:8081',
-    'http://192.168.31.147:8081',
+
 ]
 # 跨域时允许携带cookie
 CORS_ALLOW_CREDENTIALS = True
