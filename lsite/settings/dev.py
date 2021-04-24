@@ -53,9 +53,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 插入CorsMiddleware到中间件列表，位置不能错
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -66,6 +66,20 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'lsite.urls'
 
 TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'dist')]
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
@@ -80,19 +94,6 @@ TEMPLATES = [
             'environment': 'lsite.jinja2_settings.jinja2_env.jinja2_environment'
         },
     },
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    }
 ]
 
 WSGI_APPLICATION = 'lsite.wsgi.application'
@@ -152,7 +153,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/dist/')
+    os.path.join(BASE_DIR, 'dist/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
@@ -229,21 +230,21 @@ CACHES = {
      'default': {
          'BACKEND': 'django_redis.cache.RedisCache',
          # 如果redis在其它主机，这里需要将host更改为该主机ip
-         'LOCATION': 'redis://192.168.31.172:6379/0',
+         'LOCATION': 'redis://47.117.1.196:6379/0',
          "OPTIONS": {
              "CLIENT_CLASS": "django_redis.client.DefaultClient",
          }
      },
      'session': {
          'BACKEND': 'django_redis.cache.RedisCache',
-         'LOCATION': 'redis://192.168.31.172:6379/1',
+         'LOCATION': 'redis://47.117.1.196:6379/1',
          "OPTIONS": {
              "CLIENT_CLASS": "django_redis.client.DefaultClient",
          }
     },
      'verify_codes': {
          'BACKEND': 'django_redis.cache.RedisCache',
-         'LOCATION': 'redis://192.168.31.172:6379/2',
+         'LOCATION': 'redis://47.117.1.196:6379/2',
          "OPTIONS": {
              "CLIENT_CLASS": "django_redis.client.DefaultClient",
          }
@@ -258,9 +259,9 @@ SESSION_CACHE_ALIAS = "session"
 # 允许所有来源访问本站资源
 CORS_ORIGIN_ALLOW_ALL = True
 # 跨域访问白名单
-CORS_ORIGIN_WHITELIST = [
-
-]
+# CORS_ORIGIN_WHITELIST = [
+#
+# ]
 # 跨域时允许携带cookie
 CORS_ALLOW_CREDENTIALS = True
 
